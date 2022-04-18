@@ -5,15 +5,17 @@ package br.edu.ifsul.cc.lpoo.cs.model;
  *
  * @author telmo
  */
-public class Patente {
+public class Local {
     
     private Integer id;
     
     private String nome;
-        
-    private String cor;
     
-    public Patente(){
+    private String latitude;
+    
+    private String longitude;
+    
+    public Local(){
         
     }
 
@@ -46,17 +48,31 @@ public class Patente {
     }
 
     /**
-     * @return the cor
+     * @return the latitude
      */
-    public String getCor() {
-        return cor;
+    public String getLatitude() {
+        return latitude;
     }
 
     /**
-     * @param cor the cor to set
+     * @param latitude the latitude to set
      */
-    public void setCor(String cor) {
-        this.cor = cor;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * @return the longitude
+     */
+    public String getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * @param longitude the longitude to set
+     */
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
     
     

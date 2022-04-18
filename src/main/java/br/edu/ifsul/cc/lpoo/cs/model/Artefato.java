@@ -5,15 +5,17 @@ package br.edu.ifsul.cc.lpoo.cs.model;
  *
  * @author telmo
  */
-public class Patente {
+public class Artefato {
     
     private Integer id;
     
     private String nome;
-        
-    private String cor;
     
-    public Patente(){
+    private Float peso;
+    
+    private Float valor;
+    
+    public Artefato(){
         
     }
 
@@ -46,17 +48,31 @@ public class Patente {
     }
 
     /**
-     * @return the cor
+     * @return the peso
      */
-    public String getCor() {
-        return cor;
+    public Float getPeso() {
+        return peso;
     }
 
     /**
-     * @param cor the cor to set
+     * @param peso the peso to set
      */
-    public void setCor(String cor) {
-        this.cor = cor;
+    public void setPeso(Float peso) {
+        this.peso = peso;
+    }
+
+    /**
+     * @return the valor
+     */
+    public Float getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Float valor) {
+        this.valor = valor;
     }
     
     
