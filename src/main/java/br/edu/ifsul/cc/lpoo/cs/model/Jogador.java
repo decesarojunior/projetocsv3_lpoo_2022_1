@@ -1,23 +1,63 @@
 
 package br.edu.ifsul.cc.lpoo.cs.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author telmo
  */
-public class Jogador {
+@Entity
+@Table(name = "tb_jogador")
+public class Jogador implements Serializable {
     
+    @Id
     private String nickname;
+    
+    @Column(nullable = false, length = 10)
     private String senha;
+    
+    @Column
     private Integer pontos;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_cadastro;
+    
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_ultimo_login;
+    
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;//associação.
+    
+    @ManyToMany
+    @JoinTable(name = "tb_jogador_patente", joinColumns = {@JoinColumn(name = "jogador_nickname")}, //agregacao, vai gerar uma tabela associativa.
+                                       inverseJoinColumns = {@JoinColumn(name = "patente_id")})
     private List<Patente> patentes;//agregacao.
+    
+    
+    @ManyToMany
+    @JoinTable(name = "tb_jogador_artefato", joinColumns = {@JoinColumn(name = "jogador_nickname")}, //agregacao, vai gerar uma tabela associativa.
+                                       inverseJoinColumns = {@JoinColumn(name = "artefato_id")})
     private List<Artefato> artefatos;//agregacao.
+    
+    
+    @OneToMany(mappedBy = "jogador")//mappedBy deve apontar para a referencia de jogador dentro de Compra.
     private List<Compra> compras; //agregacao por composicao
     
     
