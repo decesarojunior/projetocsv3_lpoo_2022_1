@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,6 +24,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_jogador")
+@NamedQueries({      
+    @NamedQuery(name="Jogador.login",
+               query="SELECT j From Jogador j where j.nickname = :paramN and j.senha = :paramS")
+})
 public class Jogador implements Serializable {
     
     @Id

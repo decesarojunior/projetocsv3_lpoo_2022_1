@@ -2,17 +2,37 @@
 package br.edu.ifsul.cc.lpoo.cs.model;
 
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author telmo
  */
+
+@Entity
+@Table(name = "tb_arma")
+@DiscriminatorValue("A")
 public class Arma extends Artefato{
 
+    @Column(precision = 2, nullable = false)
     private Float comprimento_cano;
     
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
     
+    
+    @ManyToMany
+    @JoinTable(name = "tb_arma_municao", joinColumns = {@JoinColumn(name = "artefato_id")}, //agregacao, vai gerar uma tabela associativa.
+                                       inverseJoinColumns = {@JoinColumn(name = "municao_id")})
     private List<Municao> municoes;
     
     public Arma(){
