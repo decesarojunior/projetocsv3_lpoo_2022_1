@@ -1,7 +1,9 @@
 
 package br.edu.ifsul.cc.lpoo.cs.model.dao;
 
+import br.edu.ifsul.cc.lpoo.cs.model.Endereco;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
+import java.util.List;
 
 /**
  *
@@ -20,5 +22,7 @@ public interface InterfacePersistencia {
     public void remover(Object o) throws Exception;//delete.
     
     public Jogador doLogin(String nickname, String senha) throws Exception;
+    
+    public List<Endereco> listEnderecos();
     
 }
