@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.util.ArrayList;
 
 /**
  *
@@ -166,6 +167,13 @@ public class Jogador implements Serializable {
      * @param patentes the patentes to set
      */
     public void setPatentes(List<Patente> patentes) {
+        this.patentes = patentes;
+    }
+    
+    public void setPatente(Patente patente) {
+        if( this.patentes == null)
+            this.patentes = new ArrayList() ;
+        
         this.patentes = patentes;
     }
 
