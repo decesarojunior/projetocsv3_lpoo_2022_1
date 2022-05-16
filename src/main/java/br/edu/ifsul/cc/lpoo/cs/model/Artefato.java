@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "tb_artefato")
 @Inheritance(strategy = InheritanceType.JOINED)//alterar a estratÃ©gia.
 @DiscriminatorColumn(name = "tipo")
-public class Artefato implements Serializable {
+public abstract class Artefato implements Serializable {
     
     @Id
     @SequenceGenerator(name = "seq_artefato", sequenceName = "seq_artefato_id", allocationSize = 1)
