@@ -247,7 +247,7 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                          ps2.setString(1, j.getNickname());
                          ps2.setInt(2, p.getId());
 
-                         ps.execute();
+                         ps2.execute();
 
                     }
 
@@ -297,11 +297,46 @@ public class PersistenciaJDBC implements InterfacePersistencia{
             Patente p = (Patente) o; //converter o para o e que é do tipo Endereco
             if(p.getId() == null){ 
                 
-                //insert.
+                PreparedStatement ps = 
+                        this.con.prepareStatement(
+                                "insert into tb_patente "
+                                + "(id, cor, nome) values "
+                                + "(nextval('seq_patente_id'), ?, ?) "
+                                + "returning id");
+                
+                ps.setString(1, p.getCor());
+                ps.setString(2, p.getNome());
+                
+                //executa o comando e recupera o retorno. 
+                ResultSet rs = ps.executeQuery();                                 
+                
+                if (rs.next()) {
+                    //seta no objeto e, para disponibilizar o acesso ao id gerado.
+                    p.setId(rs.getInt(1));
+                }
+                
+                
                 
             }else{
                 
                 //update.
+                
+                PreparedStatement ps = 
+                        this.con.prepareStatement(
+                                "udpate tb_patente  set "
+                                + "cor =  ?, nome = ? where id = ?");
+                
+                ps.setString(1, p.getCor());
+                ps.setString(2, p.getNome());
+                ps.setInt(3, p.getId());
+                
+                //executa o comando e recupera o retorno. 
+                ResultSet rs = ps.executeQuery();                                 
+                
+                if (rs.next()) {
+                    //seta no objeto e, para disponibilizar o acesso ao id gerado.
+                    p.setId(rs.getInt(1));
+                }
             }
                 
         }

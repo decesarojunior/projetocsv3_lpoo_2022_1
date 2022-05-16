@@ -174,7 +174,7 @@ public class Jogador implements Serializable {
         if( this.patentes == null)
             this.patentes = new ArrayList() ;
         
-        this.patentes = patentes;
+        this.patentes.add(patente);
     }
 
     /**

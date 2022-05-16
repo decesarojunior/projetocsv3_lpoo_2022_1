@@ -1,6 +1,7 @@
 
 package br.edu.ifsul.cc.lpoo.cs.test;
 
+import br.edu.ifsul.cc.lpoo.cs.model.Endereco;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
 import br.edu.ifsul.cc.lpoo.cs.model.Patente;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
@@ -82,7 +83,6 @@ public class TestPersistenceJDBC {
     @Test
     public void testListPersistenciaJogador() throws Exception {
         
-        
         // recupera a lista de jogadores
         
         //imprimir na tela os dados de cada jogador e as suas respectivas patentes
@@ -99,7 +99,56 @@ public class TestPersistenceJDBC {
             
             List<Jogador> list = persistencia.listJogadores();
             
-            list.forEach(j->System.out.println("Jogador: "+j.getNickname()+ " CEP: "+j.getEndereco().getCep()));
+            if(!list.isEmpty()){
+                
+                for(Jogador j : list){
+                    
+                    System.out.println("Jogador : "+j.getNickname());
+                    System.out.println("Endereço: "+j.getEndereco().getCep());
+                    
+                    if(j.getPatentes() != null) {
+                        for(Patente p : j.getPatentes()){
+
+                            System.out.println("\tPatente : "+ p.getNome());
+
+                        }
+                    }
+                    
+                    j.setPontos(999);
+                    
+                    persistencia.persist(j);
+                    
+                    System.out.println(" Jogador alterado : "+ j.getNickname());
+                    
+                    persistencia.remover(j);
+                    
+                    System.out.println(" Jogador removido : "+ j.getNickname());
+                                        
+                }
+                                                                           
+            }else{
+                
+                Jogador j = new Jogador();
+                j.setNickname("teste@");
+                j.setSenha("123456");
+                j.setPontos(0);
+                Endereco end = new Endereco();
+                end.setCep("99010010");
+                
+                persistencia.persist(end);                        
+                j.setEndereco(end);
+                
+                Patente p = new Patente();
+                p.setNome("Pantente de teste");
+                persistencia.persist(p);
+                
+                j.setPatente(p);
+                persistencia.persist(j);
+                
+                System.out.println("Incluiu o jogaador "+ j.getNickname()+ " com "+ j.getPatentes().size() + " patentes.");
+                
+                
+            }
                     
             persistencia.fecharConexao();
             
@@ -109,21 +158,6 @@ public class TestPersistenceJDBC {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }
