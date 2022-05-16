@@ -81,7 +81,7 @@ public class TestPersistenceJDBC {
     
     
     @Test
-    public void testListPersistenciaJogador() throws Exception {
+    public void testListPersistenciaJogadorPatente() throws Exception {
         
         // recupera a lista de jogadores
         
@@ -160,4 +160,37 @@ public class TestPersistenceJDBC {
     }
     
     
+    @Test
+    public void testListPersistenciaJogadorArtefato() throws Exception {
+        
+        // 1) Atividade de revisão para a avaliação da primeira etapa. 
+     
+        // recupera a lista de jogadores
+        
+        //imprimir na tela os dados de cada jogador e as suas respectivos artefatos (arma e/ou municao)
+            
+
+        //remove os artefatos do jogador (tb_jogador_artefato), um a um
+                
+        //caso a lista de jogadores esteja vazia, gera um jogador contendo dois artefatos. 
+        
+    }
+            
+    
+    @Test
+    public void testListPersistenciaCompra() throws Exception {
+     
+        
+         // 2) Atividade de revisão para a avaliação da primeira etapa. 
+         
+        // recupera a lista de compras
+        
+        //imprimir na tela os dados de cada compra e as seus respectivos itens
+
+        //remova os itens e a compra
+                
+        //caso a lista de compra esteja vazia, gera uma compra contendo itens. 
+        
+    } 
+   
 }
