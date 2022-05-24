@@ -4,6 +4,7 @@ package br.edu.ifsul.cc.lpoo.cs.model.dao;
 import br.edu.ifsul.cc.lpoo.cs.model.Compra;
 import br.edu.ifsul.cc.lpoo.cs.model.Endereco;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
+import br.edu.ifsul.cc.lpoo.cs.model.Partida;
 import br.edu.ifsul.cc.lpoo.cs.model.Patente;
 import java.util.List;
 
@@ -32,5 +33,7 @@ public interface InterfacePersistencia {
     public List<Patente> listPatentes() throws Exception;
     
      public List<Compra> listCompras() throws Exception;
+     
+     public List<Partida> listPartidas() throws Exception; // atividade assincrona 24/05
     
 }

@@ -183,6 +183,14 @@ public class Jogador implements Serializable {
     public List<Artefato> getArtefatos() {
         return artefatos;
     }
+    
+    //atividade de revisao.
+    public void setArtefato(Artefato artefato) {
+        if( this.artefatos == null)
+            this.artefatos = new ArrayList() ;
+        
+        this.artefatos.add(artefato);
+    }
 
     /**
      * @param artefatos the artefatos to set

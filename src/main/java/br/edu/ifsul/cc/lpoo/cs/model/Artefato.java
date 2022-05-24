@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -38,6 +39,9 @@ public abstract class Artefato implements Serializable {
     
     @Column(precision = 2, nullable = false)
     private Float valor;
+    
+    @Transient
+    private String tipo;
     
     public Artefato(){
         
@@ -98,6 +102,22 @@ public abstract class Artefato implements Serializable {
     public void setValor(Float valor) {
         this.valor = valor;
     }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipoArtefato() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipoArtefato(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
     
     
     

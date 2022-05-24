@@ -4,6 +4,7 @@ package br.edu.ifsul.cc.lpoo.cs.model.dao;
 import br.edu.ifsul.cc.lpoo.cs.model.Compra;
 import br.edu.ifsul.cc.lpoo.cs.model.Endereco;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
+import br.edu.ifsul.cc.lpoo.cs.model.Partida;
 import br.edu.ifsul.cc.lpoo.cs.model.Patente;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -89,6 +90,14 @@ public class PersistenciaJPA implements InterfacePersistencia{
     @Override
     public List<Compra> listCompras() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Partida> listPartidas() throws Exception {
+        
+        //resposta para a atividade assincrona 7/05
+        //executa a consulta nomeada e retorna a lista.
+        return entity.createNamedQuery("Partida.getbyid").getResultList();
     }
     
 }

@@ -1,9 +1,14 @@
 
 package br.edu.ifsul.cc.lpoo.cs.test;
 
+import br.edu.ifsul.cc.lpoo.cs.model.Arma;
+import br.edu.ifsul.cc.lpoo.cs.model.Artefato;
+import br.edu.ifsul.cc.lpoo.cs.model.Calibre;
 import br.edu.ifsul.cc.lpoo.cs.model.Endereco;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
+import br.edu.ifsul.cc.lpoo.cs.model.Municao;
 import br.edu.ifsul.cc.lpoo.cs.model.Patente;
+import br.edu.ifsul.cc.lpoo.cs.model.Tipo;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
 import java.util.List;
 import org.junit.Test;
@@ -80,7 +85,7 @@ public class TestPersistenceJDBC {
     }
     
     
-    @Test
+    //@Test
     public void testListPersistenciaJogadorPatente() throws Exception {
         
         // recupera a lista de jogadores
@@ -160,6 +165,54 @@ public class TestPersistenceJDBC {
     }
     
     
+    private Artefato getArtefato(PersistenciaJDBC persistencia, Integer id, String tipo) throws Exception {
+        
+        Artefato a = (Artefato) persistencia.find(Artefato.class, id);
+        if(a == null){
+            if(tipo.equals("A")){                
+                Arma arma = new Arma();
+                arma.setNome("Revolver");
+                arma.setPeso(1.5f);
+                arma.setValor(1500f);
+                arma.setComprimento_cano(1.2f);
+                arma.setTipo(Tipo.FOGO);
+                arma.setTipoArtefato("A");
+                persistencia.persist(arma);                             
+                return arma;
+            }else{
+                Municao municao = new Municao();
+                municao.setNome("Bala");
+                municao.setPeso(0.5f);
+                municao.setValor(25.5f);
+                municao.setExplosiva(Boolean.FALSE);
+                municao.setCalibre(Calibre.C03);
+                municao.setTipoArtefato("M");
+                persistencia.persist(municao);
+                return municao;
+            }                
+            
+        }
+        
+        return a;
+        
+    }
+    
+    private Endereco getEndereco(PersistenciaJDBC persistencia, Integer id) throws Exception {
+        
+        Endereco e = (Endereco) persistencia.find(Endereco.class, id);
+        if(e == null){            
+                e = new Endereco();
+                e.setCep("99010011");
+                e.setComplemento("nenhum");                
+                persistencia.persist(e);                             
+                                        
+        }
+        
+        return e;
+        
+    }
+    
+    
     @Test
     public void testListPersistenciaJogadorArtefato() throws Exception {
         
@@ -174,10 +227,54 @@ public class TestPersistenceJDBC {
                 
         //caso a lista de jogadores esteja vazia, gera um jogador contendo dois artefatos. 
         
+        
+        PersistenciaJDBC persistencia = new PersistenciaJDBC();
+        if(persistencia.conexaoAberta()){
+            System.out.println("abriu a conexao com o BD via jdbc");
+            
+            List<Jogador> list = persistencia.listJogadores();
+            
+            if(list == null || list.isEmpty()){
+                
+                Jogador j = new Jogador();
+                j.setNickname("fulano@");
+                j.setSenha("123456");
+                j.setPontos(0);
+                j.setEndereco(getEndereco(persistencia, 1));
+                j.setArtefato(getArtefato(persistencia, 1, "A"));
+                
+                persistencia.persist(j);
+                
+                System.out.println("Cadastrou o jogador "+j.getNickname());
+                
+                
+            }else{
+                
+                System.out.println("Listagem de jogadores cadastrados:");
+                for(Jogador j : list){
+                    
+                    System.out.println("\tJogador: "+j.getNickname());                    
+                    System.out.println("\t\tArtefatos:");
+                    if(j.getArtefatos() != null)
+                        for(Artefato a: j.getArtefatos()){
+                            System.out.println("\t\t\tArtefato "+a.getNome());
+                        }
+                    
+                    persistencia.remover(j);
+                    System.out.println("Removeu o jogador "+j.getNickname());
+                }
+                                
+            }
+            
+            persistencia.fecharConexao();
+            
+        }else{
+            System.out.println("Nao abriu a conexao com o BD via jdbc");
+        } 
     }
             
     
-    @Test
+    //@Test
     public void testListPersistenciaCompra() throws Exception {
      
         
