@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -24,6 +26,10 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tb_compra")
+@NamedQueries({      
+    @NamedQuery(name="Compra.getbyid",
+               query="SELECT c From Compra c order by c.id asc ")
+})
 public class Compra implements Serializable {
     
     @Id

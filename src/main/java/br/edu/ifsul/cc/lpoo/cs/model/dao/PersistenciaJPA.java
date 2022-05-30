@@ -67,7 +67,7 @@ public class PersistenciaJPA implements InterfacePersistencia{
 
     @Override
     public Jogador doLogin(String nickname, String senha) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override
@@ -79,17 +79,18 @@ public class PersistenciaJPA implements InterfacePersistencia{
 
     @Override
     public List<Jogador> listJogadores() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public List<Patente> listPatentes() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public List<Compra> listCompras() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
+        return entity.createNamedQuery("Compra.getbyid").getResultList();        
     }
 
     @Override

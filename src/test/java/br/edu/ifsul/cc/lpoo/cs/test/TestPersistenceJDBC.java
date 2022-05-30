@@ -212,7 +212,7 @@ public class TestPersistenceJDBC {
         
     }
     
-    
+
     @Test
     public void testListPersistenciaJogadorArtefato() throws Exception {
         
