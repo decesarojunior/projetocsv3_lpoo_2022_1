@@ -2,6 +2,7 @@
 package br.edu.ifsul.cc.lpoo.cs.gui;
 
 
+import br.edu.ifsul.cc.lpoo.cs.Controle;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
@@ -16,15 +17,17 @@ import javax.swing.JPanel;
  */
 public class JFramePrincipal extends JFrame implements WindowListener {
     
-    
+    private Controle controle;
+     
+     
     public CardLayout cardLayout;
     
     public JPanel painel;//painel.
     
     
-    public JFramePrincipal(){
+    public JFramePrincipal(Controle controle){
         
-       
+        this.controle = controle;
         
         initComponents();        
         
