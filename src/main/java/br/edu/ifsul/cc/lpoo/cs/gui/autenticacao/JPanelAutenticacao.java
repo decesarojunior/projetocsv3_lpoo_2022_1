@@ -124,7 +124,7 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
                         
                         controle.autenticar(txfNickname.getText().trim(), new String(psfSenha.getPassword()).trim());
                         
-                    }else{
+                    }else {
                         
                         JOptionPane.showMessageDialog(this, "Informe Senha com 4 ou mais dígitos", "Autenticação", JOptionPane.ERROR_MESSAGE);
                         psfSenha.setBorder(new LineBorder(Color.red,1));
