@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class ProjetoCSV3_LPOO_2022_1 {
     
-     private Controle controle;
+    private Controle controle;
     
     public ProjetoCSV3_LPOO_2022_1(){
         
