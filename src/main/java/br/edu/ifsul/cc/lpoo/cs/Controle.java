@@ -6,7 +6,9 @@ package br.edu.ifsul.cc.lpoo.cs;
 
 import br.edu.ifsul.cc.lpoo.cs.gui.JFramePrincipal;
 import br.edu.ifsul.cc.lpoo.cs.gui.autenticacao.JPanelAutenticacao;
+import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,12 +64,31 @@ public class Controle {
         return conexaoJDBC;
     }
 
-    public void autenticar(String trim, String trim0) {
+    public void autenticar(String cpf, String senha) {
         //  implementar o metodo doLogin da classe PersistenciaJDBC
         //  chamar o doLogin e verificar o retorno.
         // se o retorno for nulo, informar ao usuário
         //se nao for nulo, apresentar a tela de boas vindas e o menu.
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+
+            Jogador j =  conexaoJDBC.doLogin(cpf, senha);
+            
+            if(j != null){
+
+                JOptionPane.showMessageDialog(telaAutenticacao, "Jogador "+j.getNickname()+" autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
+
+                //frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
+                frame.showTela("tela_home");//muda a tela para o painel de boas vindas (home)
+
+            }else{
+
+                JOptionPane.showMessageDialog(telaAutenticacao, "Dados inválidos!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        }catch(Exception e){
+
+            JOptionPane.showMessageDialog(telaAutenticacao, "Erro ao executar a autenticação no Banco de Dados!", "Autenticação", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
 }
