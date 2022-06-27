@@ -5,6 +5,8 @@
 package br.edu.ifsul.cc.lpoo.cs;
 
 import br.edu.ifsul.cc.lpoo.cs.gui.JFramePrincipal;
+import br.edu.ifsul.cc.lpoo.cs.gui.JMenuBarHome;
+import br.edu.ifsul.cc.lpoo.cs.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cs.gui.autenticacao.JPanelAutenticacao;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
@@ -22,6 +24,10 @@ public class Controle {
     
     private JFramePrincipal frame; // frame principal da minha aplicação gráfica
 
+    private JMenuBarHome menuBar;
+    
+    private JPanelHome  telaHome;
+    
     
     public Controle(){
                         
@@ -51,6 +57,13 @@ public class Controle {
         
         frame.addTela(telaAutenticacao, "tela_autenticacao"); //adiciona
         
+        menuBar = new JMenuBarHome(this);
+        
+        telaHome = new JPanelHome(this);
+        
+        
+        frame.addTela(telaHome, "tela_home"); //adiciona
+        
         frame.showTela("tela_autenticacao");   //mostra
         
         frame.setVisible(true); // torna visível o jframe
@@ -77,7 +90,7 @@ public class Controle {
 
                 JOptionPane.showMessageDialog(telaAutenticacao, "Jogador "+j.getNickname()+" autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
 
-                //frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
+                frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
                 frame.showTela("tela_home");//muda a tela para o painel de boas vindas (home)
 
             }else{
