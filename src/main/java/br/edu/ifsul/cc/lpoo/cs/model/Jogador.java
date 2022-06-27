@@ -212,4 +212,9 @@ public class Jogador implements Serializable {
     public void setCompras(List<Compra> compras) {
         this.compras = compras;
     }
+    
+    @Override
+    public String toString(){        
+        return nickname;
+    }
 }

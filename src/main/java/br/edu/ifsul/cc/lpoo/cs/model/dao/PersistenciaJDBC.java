@@ -715,8 +715,28 @@ public class PersistenciaJDBC implements InterfacePersistencia{
     }
 
     @Override
-    public List<Endereco> listEnderecos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Endereco> listEnderecos() throws Exception {
+         List<Endereco> lista = null;
+                        
+        PreparedStatement ps = this.con.prepareStatement("select id, cep, complemento from tb_endereco order by id asc");
+        
+        ResultSet rs = ps.executeQuery();//executa a query        
+        /*                                     
+                  8 | 99052250 | 110
+            next->9 | 990010   | 1            
+        */        
+        lista = new ArrayList();
+        while(rs.next()){
+            
+            Endereco end = new Endereco();
+            end.setId(rs.getInt("id"));
+            end.setCep(rs.getString("cep"));
+            end.setComplemento(rs.getString("complemento"));
+            
+            lista.add(end);//adiciona na lista o objetivo que contem as informações de um determinada linha do ResultSet.
+            
+        }                
+        return lista;
     }
     
     @Override

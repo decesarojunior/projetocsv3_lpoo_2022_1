@@ -213,7 +213,7 @@ public class TestPersistenceJDBC {
     }
     
 
-    @Test
+    //@Test
     public void testListPersistenciaJogadorArtefato() throws Exception {
         
         // 1) Atividade de revisão para a avaliação da primeira etapa. 

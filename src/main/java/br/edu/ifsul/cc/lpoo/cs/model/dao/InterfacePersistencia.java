@@ -26,7 +26,7 @@ public interface InterfacePersistencia {
     
     public Jogador doLogin(String nickname, String senha) throws Exception;
     
-    public List<Endereco> listEnderecos();
+    public List<Endereco> listEnderecos() throws Exception;
     
     public List<Jogador> listJogadores() throws Exception;
     

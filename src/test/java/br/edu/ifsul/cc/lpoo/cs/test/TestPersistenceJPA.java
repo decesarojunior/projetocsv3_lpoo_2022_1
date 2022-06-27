@@ -253,7 +253,7 @@ public class TestPersistenceJPA {
        caso a lista de compra esteja vazia, gera uma compra contendo itens. 
     */
     
-    @Test
+    //@Test
     public void testListPersistenciaCompra() throws Exception {
         
         PersistenciaJPA persistencia = new PersistenciaJPA();

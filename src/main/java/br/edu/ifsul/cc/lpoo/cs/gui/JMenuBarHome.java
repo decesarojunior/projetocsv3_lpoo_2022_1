@@ -100,7 +100,7 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
         }else if(e.getActionCommand().equals(menuItemJogador.getActionCommand())){
             
                         //se o usuario clicou no menuitem Usuario            
-                        //->controle.showTela("tela_jogador_a");          
+                        controle.showTela("tela_jogador");          
                         
         }else if(e.getActionCommand().equals(menuItemLogout.getActionCommand())){
             

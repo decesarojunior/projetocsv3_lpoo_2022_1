@@ -83,6 +83,30 @@ public class Endereco implements Serializable {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+    
+        @Override
+    public String toString(){
+        return cep;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+
+        if(o == null){
+            return false;
+
+        }else if(!(o instanceof Endereco)){
+            return false;
+
+        }else{
+            Endereco e = (Endereco) o;
+            if (e.getId().intValue() == this.getId().intValue()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
             
             
     

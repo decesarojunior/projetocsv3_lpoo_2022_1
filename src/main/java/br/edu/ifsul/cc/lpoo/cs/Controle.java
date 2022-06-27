@@ -8,6 +8,7 @@ import br.edu.ifsul.cc.lpoo.cs.gui.JFramePrincipal;
 import br.edu.ifsul.cc.lpoo.cs.gui.JMenuBarHome;
 import br.edu.ifsul.cc.lpoo.cs.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cs.gui.autenticacao.JPanelAutenticacao;
+import br.edu.ifsul.cc.lpoo.cs.gui.jogador.JPanelAJogador;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
 import javax.swing.JOptionPane;
@@ -27,6 +28,8 @@ public class Controle {
     private JMenuBarHome menuBar;
     
     private JPanelHome  telaHome;
+    
+    private JPanelAJogador telaJogador;
     
     
     public Controle(){
@@ -61,6 +64,9 @@ public class Controle {
         
         telaHome = new JPanelHome(this);
         
+        telaJogador = new JPanelAJogador(this);
+        
+        frame.addTela(telaJogador, "tela_jogador");
         
         frame.addTela(telaHome, "tela_home"); //adiciona
         
@@ -103,5 +109,14 @@ public class Controle {
             JOptionPane.showMessageDialog(telaAutenticacao, "Erro ao executar a autenticação no Banco de Dados!", "Autenticação", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+     public void showTela(String nomeTela){
+         
+         if(nomeTela.equals("tela_jogador")){
+            telaJogador.showTela("tela_jogador_listagem");
+            frame.showTela(nomeTela);
+         }
+         
+     }
     
 }
