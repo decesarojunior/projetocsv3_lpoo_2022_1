@@ -694,7 +694,24 @@ public class PersistenciaJDBC implements InterfacePersistencia{
 
     @Override
     public Jogador doLogin(String nickname, String senha) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       Jogador jogador = null;
+        
+         PreparedStatement ps = 
+            this.con.prepareStatement("select j.nickname, j.senha from tb_jogador j where j.nickname= ? and j.senha = ? ");
+                        
+            ps.setString(1, nickname);
+            ps.setString(2, senha);
+            
+            ResultSet rs = ps.executeQuery();//o ponteiro do REsultSet inicialmente está na linha -1
+            
+            if(rs.next()){//se a matriz (ResultSet) tem uma linha
+
+                jogador = new Jogador();
+                jogador.setNickname(rs.getString("nickname"));                
+            }
+        
+            ps.close();
+            return jogador;   
     }
 
     @Override
