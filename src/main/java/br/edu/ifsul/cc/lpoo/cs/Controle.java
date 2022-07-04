@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.edu.ifsul.cc.lpoo.cs;
 
 import br.edu.ifsul.cc.lpoo.cs.gui.JFramePrincipal;
@@ -9,6 +6,7 @@ import br.edu.ifsul.cc.lpoo.cs.gui.JMenuBarHome;
 import br.edu.ifsul.cc.lpoo.cs.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cs.gui.autenticacao.JPanelAutenticacao;
 import br.edu.ifsul.cc.lpoo.cs.gui.jogador.JPanelAJogador;
+import br.edu.ifsul.cc.lpoo.cs.gui.jogador.designer.JPanelDJogador;
 import br.edu.ifsul.cc.lpoo.cs.model.Jogador;
 import br.edu.ifsul.cc.lpoo.cs.model.dao.PersistenciaJDBC;
 import javax.swing.JOptionPane;
@@ -31,6 +29,8 @@ public class Controle {
     
     private JPanelAJogador telaJogador;
     
+    private JPanelDJogador telaJogadorDesigner;
+    
     
     public Controle(){
                         
@@ -49,10 +49,8 @@ public class Controle {
     }
     
     public void initComponents(){
-    
         
-        //inicia a interface gráfica.
-        //"caminho feliz" : passo 5
+        //para cada nova tela de CRUD inicializar o respectivo objeto
         
         frame = new JFramePrincipal(this);
         
@@ -66,11 +64,16 @@ public class Controle {
         
         telaJogador = new JPanelAJogador(this);
         
+        telaJogadorDesigner = new JPanelDJogador(this);
+        
+        frame.addTela(telaJogadorDesigner, "tela_jogador_designer");
+        
         frame.addTela(telaJogador, "tela_jogador");
         
         frame.addTela(telaHome, "tela_home"); //adiciona
         
         frame.showTela("tela_autenticacao");   //mostra
+        
         
         frame.setVisible(true); // torna visível o jframe
         
@@ -110,13 +113,27 @@ public class Controle {
         }
     }
     
-     public void showTela(String nomeTela){
+    public void showTela(String nomeTela){
          
+        //para cada nova tela de CRUD adicionar um elseif
+        
          if(nomeTela.equals("tela_jogador")){
             telaJogador.showTela("tela_jogador_listagem");
             frame.showTela(nomeTela);
+            
+         }else if(nomeTela.endsWith("tela_jogador_designer")){
+             
+             telaJogadorDesigner.showTela("listagem");
+              frame.showTela(nomeTela);
          }
          
-     }
+    }
+     
+    public void fecharBD(){
+
+        System.out.println("Fechando conexao com o Banco de Dados");
+        getConexaoJDBC().fecharConexao();
+
+    }
     
 }

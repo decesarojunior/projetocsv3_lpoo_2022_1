@@ -76,8 +76,9 @@ public class JFramePrincipal extends JFrame implements WindowListener {
     public void windowClosing(WindowEvent we) {
                 
         System.out.println("Fechando o jframe ..");
+        
+        controle.fecharBD(); //fecha a conexao com o BD antes de finalizar o processo.
     
-                
     }
 
     @Override

@@ -439,7 +439,7 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                 PreparedStatement ps2 = this.con.prepareStatement("delete from tb_jogador_patente where jogador_nickname = ? ");
                 ps2.setString(1, j.getNickname());
                 ps2.execute();
-                                
+                                                
                 if(j.getPatentes() != null && !j.getPatentes().isEmpty()){
 
                     for(Patente p : j.getPatentes()){

@@ -77,6 +77,12 @@ public class Patente implements Serializable{
         this.cor = cor;
     }
     
+        
+    @Override
+    public String toString(){
+        return nome;
+    }
+    
     
     
 }

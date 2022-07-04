@@ -160,7 +160,7 @@ public class Jogador implements Serializable {
      * @return the patentes
      */
     public List<Patente> getPatentes() {
-        return patentes;
+        return this.patentes;
     }
 
     /**

@@ -23,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -77,6 +78,7 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
     private JTable tblListagemPatente;
     private JComboBox cbxPatente;
     private JButton btnAdicionarPatente;
+    private JButton btnRemoverPatente;
     private DefaultTableModel modeloTabelaPatente;
     private JLabel lblPatenteAdicionar;
 
@@ -158,6 +160,22 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
                 j.setData_ultimo_login(jogador.getData_ultimo_login());
             
             
+            DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+            
+            for(Vector<Vector> linha : model.getDataVector()){
+                
+                Vector v = (Vector) linha; //model.addRow(new Object[]{u, u.getNome(), ...
+
+                Patente p = (Patente) v.get(1);
+                
+                System.out.println("Add patente no jogador ...");  
+                        
+                j.setPatente(p);
+                
+            }
+            
+        
+            
             return j;
          }
 
@@ -175,6 +193,11 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
             txfDataUltimoLogin.setText("");
             txfNickname.setEditable(true);
             jogador = null;
+            
+            //limpa a tabela das patentes do jogador.
+            DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+            model.setRowCount(0);
+            
 
         }else{
 
@@ -188,6 +211,20 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
             if(j.getData_ultimo_login() != null)
                 txfDataUltimoLogin.setText(format.format(j.getData_ultimo_login().getTime()));
 
+            //gera linhas na tabela para listar as patentes de um determinado jogador.
+            if(jogador.getPatentes() != null){
+                
+                for(Patente p : jogador.getPatentes()){
+                    
+                    DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+
+                    model.setRowCount(0);//elimina as linhas existentes (reset na tabela)
+                    
+                    model.addRow(new Object[]{p.getId(), p});
+        
+                }
+            }
+                        
         }
 
     }
@@ -306,6 +343,8 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
         lblPatenteAdicionar = new JLabel("Escolha a Patente para adicionar:");
         btnAdicionarPatente = new JButton("Adicionar");
         
+        btnRemoverPatente = new JButton("Remover");
+        
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 0;// posição da coluna (horizontal)
@@ -323,12 +362,26 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
         pnlDadosPatentes.add(pnlLinha, posicionador);//o add adiciona o rotulo no painel
         
         
+        btnAdicionarPatente.addActionListener(this);
+        btnAdicionarPatente.setActionCommand("botao_adicionar_patente_formulario_jogador");
+  
+    
+        btnRemoverPatente.addActionListener(this);
+        btnRemoverPatente.setActionCommand("botao_remover_patente_formulario_jogador");
+  
+        
+        JPanel pnlLinhaB = new JPanel();
+        pnlLinhaB.setLayout(new FlowLayout());
+        pnlLinhaB.add(btnAdicionarPatente);
+        pnlLinhaB.add(btnRemoverPatente);
+        
         posicionador = new GridBagConstraints();
         posicionador.gridy = 2;//policao da linha (vertical)
         posicionador.gridx = 0;// posição da coluna (horizontal)
-        pnlDadosPatentes.add(btnAdicionarPatente, posicionador);//o add adiciona o rotulo no painel
+        pnlDadosPatentes.add(pnlLinhaB, posicionador);//o add adiciona o rotulo no painel
+   
         
-                
+        
         tbpAbas.addTab("Patentes", pnlDadosPatentes);
         
         
@@ -400,6 +453,33 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
             
                 pnlAJogador.showTela("tela_jogador_listagem");
             
+        }else if(arg0.getActionCommand().equals(btnAdicionarPatente.getActionCommand())){
+            
+            //adiciona uma patente na lista de patentes do jogador (jtable)
+            if(cbxPatente.getSelectedIndex() > 0){
+                
+                DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+
+                Patente  p =  (Patente) cbxPatente.getSelectedItem();
+            
+                model.addRow(new Object[] {p.getId(), p});
+                
+            }else{
+                
+                JOptionPane.showMessageDialog(this, "Selecione uma Patente para adicionar !!", "Patentes do Jogador", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+              
+        }else if(arg0.getActionCommand().equals(btnRemoverPatente.getActionCommand())){
+            
+            int indice = tblListagemPatente.getSelectedRow();//recupera a linha selecionada
+            if(indice > -1){
+
+                DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel(); //recuperacao do modelo da table
+                
+                model.removeRow(indice); // remove a linha selecionada.
+                   
+            }
         }
     }
 }
