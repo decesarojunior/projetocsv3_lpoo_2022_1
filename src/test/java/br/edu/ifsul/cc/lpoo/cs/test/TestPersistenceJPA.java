@@ -25,7 +25,7 @@ public class TestPersistenceJPA {
     
 
     
-    //@Test 
+    @Test 
     public void testConexaoGeracaoTabelas(){
         
         PersistenciaJPA persistencia = new PersistenciaJPA();

@@ -212,17 +212,25 @@ public class JPanelAJogadorFormulario extends JPanel implements ActionListener{
                 txfDataUltimoLogin.setText(format.format(j.getData_ultimo_login().getTime()));
 
             //gera linhas na tabela para listar as patentes de um determinado jogador.
+            
+            
             if(jogador.getPatentes() != null){
                 
-                for(Patente p : jogador.getPatentes()){
-                    
-                    DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+                DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
 
-                    model.setRowCount(0);//elimina as linhas existentes (reset na tabela)
+                model.setRowCount(0);//elimina as linhas existentes (reset na tabela)
+                
+                for(Patente p : jogador.getPatentes()){
                     
                     model.addRow(new Object[]{p.getId(), p});
         
                 }
+                
+            }else{
+                
+                DefaultTableModel model =  (DefaultTableModel) tblListagemPatente.getModel();//recuperacao do modelo da tabela
+
+                model.setRowCount(0);//elimina as linhas existentes (reset na tabela)
             }
                         
         }

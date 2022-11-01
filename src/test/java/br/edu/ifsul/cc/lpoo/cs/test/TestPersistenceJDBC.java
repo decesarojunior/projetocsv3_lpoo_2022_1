@@ -85,7 +85,7 @@ public class TestPersistenceJDBC {
     }
     
     
-    //@Test
+    @Test
     public void testListPersistenciaJogadorPatente() throws Exception {
         
         // recupera a lista de jogadores
